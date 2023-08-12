@@ -4,6 +4,10 @@ import java.util.*;
 
 public class App {
 
+    public static void main(String[] args) {
+        System.out.println(scrabble("jvayu", "java"));
+    }
+
     public static boolean scrabble(String heap, String word) {
         Map<Character, Integer> charCountMap = new HashMap<>();
 
@@ -18,6 +22,15 @@ public class App {
             }
         }
 
-        return charCountMap.values().stream().allMatch(value -> value == 0);
+        boolean allZero = true;
+
+        for (Integer value : charCountMap.values()) {
+            if (value > 0) {
+                allZero = false;
+                break;
+            }
+        }
+
+        return allZero;
     }
 }

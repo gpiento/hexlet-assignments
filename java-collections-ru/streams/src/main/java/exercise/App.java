@@ -7,13 +7,9 @@ public class App {
 
     public static long getCountOfFreeEmails(List<String> emails) {
         return emails.stream()
-                .filter(App::isFreeEmail)
+                .filter(string -> (string.endsWith("gmail.com")
+                        || string.endsWith("yandex.ru")
+                        || string.endsWith("hotmail.com")))
                 .count();
-    }
-
-    public static boolean isFreeEmail(String email) {
-        return email.endsWith("gmail.com")
-                || email.endsWith("yandex.ru")
-                || email.endsWith("hotmail.com");
     }
 }

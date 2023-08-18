@@ -11,7 +11,8 @@ public class Sorter {
         return user.stream()
                 .filter(map -> map.get("gender").equals("male"))
                 .sorted((Map<String, String> map1, Map<String, String> map2)
-                        -> LocalDate.parse(map1.get("birthday")).compareTo(LocalDate.parse(map2.get("birthday"))))
+                        -> LocalDate.parse(map1.get("birthday"))
+                        .compareTo(LocalDate.parse(map2.get("birthday"))))
                 .map(map -> map.get("name"))
                 .collect(Collectors.toList());
     }

@@ -5,7 +5,7 @@ import java.util.stream.Stream;
 
 public class App {
 
-        public static String getForwardedVariables(String nameConfig) {
+    public static String getForwardedVariables(String nameConfig) {
 
         return Stream.of(nameConfig)
                 .map(s -> s.trim().replaceAll("^environment=\"|\"$", ""))

@@ -20,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class FileKVTest {
 
-    private static final Path filepath = Paths.get("src/test/resources/file").toAbsolutePath().normalize();
+    private static Path filepath = Paths.get("src/test/resources/file").toAbsolutePath().normalize();
 
     @BeforeEach
     public void beforeEach() throws Exception {
@@ -32,10 +32,10 @@ class FileKVTest {
     @Test
     @DisplayName("FileKV test")
     void testFileKV() {
-        KeyValueStorage storage = new FileKV(filepath, Map.of("key", "value"));
+        KeyValueStorage storage = new FileKV(filepath.toString(), Map.of("key", "value"));
 
         assertThat(storage.get("key2", "default")).isEqualTo("default");
-        assertThat(storage.get("key", "default")).isEqualTo("key");
+        assertThat(storage.get("key", "default")).isEqualTo("value");
 
         storage.set("key2", "value2");
 

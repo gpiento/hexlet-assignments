@@ -2,13 +2,18 @@ package exercise;
 
 class Address {
     @NotNull
+    @MinLength(minLength = 4)
     private String country;
+
     @NotNull
     private String city;
+
     @NotNull
     private String street;
+
     @NotNull
     private String houseNumber;
+
     private String flatNumber;
 
     Address(String country, String city, String street, String houseNumber, String flatNumber) {

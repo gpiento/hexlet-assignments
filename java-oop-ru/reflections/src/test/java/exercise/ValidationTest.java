@@ -1,10 +1,11 @@
 package exercise;
 
 import org.junit.jupiter.api.Test;
-import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.List;
 import java.util.Map;
 
+import static org.assertj.core.api.Assertions.assertThat;
 
 
 class ValidationTest {
@@ -27,7 +28,14 @@ class ValidationTest {
         assertThat(result3).isEqualTo(expected3);
     }
 
-    // BEGIN
-    
-    // END
+    @Test
+    void testAdvancedValidate() {
+        Address address = new Address("USA", "Texas", null, "7", "2");
+        Map<String, List<String>> result = Validator.advancedValidate(address);
+        Map<String, List<String>> expected = Map.of(
+                "country", List.of("Field length must be at least 4"),
+                "street", List.of("Field cannot be null")
+        );
+        assertThat(result).isEqualTo(expected);
+    }
 }

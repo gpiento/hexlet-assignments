@@ -1,6 +1,5 @@
 package exercise;
 
-import lombok.AllArgsConstructor;
 import lombok.Value;
 
 @Value

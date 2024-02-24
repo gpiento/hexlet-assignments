@@ -2,7 +2,6 @@ package exercise;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.SneakyThrows;
 import lombok.Value;
 
 import java.io.IOException;
@@ -15,14 +14,20 @@ class Car {
     String color;
     User owner;
 
-    @SneakyThrows
     public String serialize() {
-        return new ObjectMapper().writeValueAsString(this);
+        try {
+            return new ObjectMapper().writeValueAsString(this);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    @SneakyThrows
-    public static Car unserialize(final String json)  {
-        return new ObjectMapper().readValue(json, Car.class);
+    public static Car unserialize(final String json) {
+        try {
+            return new ObjectMapper().readValue(json, Car.class);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
 

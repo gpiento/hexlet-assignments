@@ -7,7 +7,10 @@ import io.javalin.Javalin;
 import io.javalin.http.NotFoundResponse;
 import io.javalin.rendering.template.JavalinJte;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static io.javalin.rendering.template.TemplateUtil.model;
 
@@ -34,7 +37,8 @@ public final class App {
         });
 
         app.get("/users", ctx -> {
-            UsersPage page = new UsersPage(USERS);
+            List<User> userList = USERS.stream().sorted(Comparator.comparingLong(User::getId)).toList();
+            UsersPage page = new UsersPage(userList);
             ctx.render("users/index.jte", model("page", page));
         });
 

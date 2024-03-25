@@ -21,7 +21,6 @@
             <th scope="col">First Name</th>
             <th scope="col">Last Name</th>
             <th scope="col">Email</th>
-            <th scope="col">Actions</th>
         </tr>
         </thead>
         <tbody>
@@ -30,11 +29,10 @@
         @else
             @for(User user : page.getUsers())
                 <tr>
-                    <th scope="row">${user.getId()}</th>
+                    <th scope="row"><a href="/users/${user.getId()}">${user.getId()}</a></th>
                     <td>${user.getFirstName()}</td>
                     <td>${user.getLastName()}</td>
                     <td>${user.getEmail()}</td>
-                    <td><a href="/users/${user.getId()}">View</a></td>
                 </tr>
             @endfor
         @endif

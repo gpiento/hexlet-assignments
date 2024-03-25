@@ -4,6 +4,7 @@ import exercise.dto.users.UserPage;
 import exercise.dto.users.UsersPage;
 import exercise.model.User;
 import io.javalin.Javalin;
+import io.javalin.http.NotFoundResponse;
 import io.javalin.rendering.template.JavalinJte;
 
 import java.util.List;
@@ -24,7 +25,10 @@ public final class App {
 
         app.get("/users/{id}", ctx -> {
             String id = ctx.pathParam("id");
-            User user = USERS.get(Integer.parseInt(id) - 1);
+            User user = USERS.stream()
+                    .filter(u -> u.getId() == Integer.parseInt(id))
+                    .findFirst()
+                    .orElseThrow(() -> new NotFoundResponse("User with id = " + id + " not found"));
             UserPage page = new UserPage(user);
             ctx.render("users/show.jte", model("page", page));
         });

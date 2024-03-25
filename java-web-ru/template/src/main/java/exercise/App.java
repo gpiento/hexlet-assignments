@@ -28,7 +28,7 @@ public final class App {
             User user = USERS.stream()
                     .filter(u -> u.getId() == Integer.parseInt(id))
                     .findFirst()
-                    .orElseThrow(() -> new NotFoundResponse("User with id = " + id + " not found"));
+                    .orElseThrow(() -> new NotFoundResponse("User with id = " + id + " not found."));
             UserPage page = new UserPage(user);
             ctx.render("users/show.jte", model("page", page));
         });

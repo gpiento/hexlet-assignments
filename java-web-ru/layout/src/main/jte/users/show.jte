@@ -8,8 +8,7 @@ content = @`
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">User ID: ${page.getUser().getId()}</h5>
-                <p class="card-text">First Name: ${page.getUser().getFirstName()}</p>
-                <p class="card-text">Last Name: ${page.getUser().getLastName()}</p>
+                <p class="card-text">Name: ${page.getUser().getFirstName()} ${page.getUser().getLastName()}</p>
                 <p class="card-text">Email: ${page.getUser().getEmail()}</p>
             </div>
         </div>

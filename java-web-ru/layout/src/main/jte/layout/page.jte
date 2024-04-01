@@ -13,8 +13,8 @@
 </head>
 <body>
 <p>
-    <a href="/">Main page</a>
-    <a href="/users">Users</a>
+    <a href="/">/</a>
+    <a href="/users">/users</a>
 </p>
 ${content}
 <p>

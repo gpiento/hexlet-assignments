@@ -6,7 +6,6 @@ import exercise.repository.UserRepository;
 import exercise.util.Security;
 import io.javalin.Javalin;
 import io.javalin.rendering.template.JavalinJte;
-import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 
@@ -27,17 +26,13 @@ public final class App {
         });
 
         app.post("/users", ctx -> {
-            String firstName = upperCase(ctx.formParam("firstName"));
-            String lastName = upperCase(ctx.formParam("lastName"));
+            String firstName = capitalize(ctx.formParam("firstName"));
+            String lastName = capitalize(ctx.formParam("lastName"));
             String email = lowerCase(trim(ctx.formParam("email")));
             String password = ctx.formParam("password");
             String passwordConfirmation = ctx.formParam("passwordConfirmation");
-            if (!password.equals(passwordConfirmation)) {
-                ctx.sessionAttribute("error", "Пароли не совпадают");
-                ctx.redirect("/users/build");
-                return;
-            }
             String cryptPassword = Security.encrypt(password);
+
             User user = new User(firstName, lastName, email, cryptPassword);
             UserRepository.save(user);
             ctx.redirect("/users");

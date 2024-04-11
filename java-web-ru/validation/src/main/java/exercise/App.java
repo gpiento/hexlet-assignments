@@ -54,7 +54,7 @@ public final class App {
                 String title = ctx.formParam("title");
                 String content = ctx.formParam("content");
                 BuildArticlePage page = new BuildArticlePage(title, content, e.getErrors());
-                ctx.render("articles/build.jte", model("page", page));
+                ctx.render("articles/build.jte", model("page", page)).status(422);
             }
         });
         // END

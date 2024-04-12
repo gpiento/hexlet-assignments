@@ -34,9 +34,7 @@ content = @`
                 </div>
                 <div class="mb-3">
                     <label for="exampleFormControlTextarea1" class="form-label">Текст статьи</label>
-                    <textarea required class="form-control" name="content" id="exampleFormControlTextarea1">
-                        ${page.getContent()}
-                    </textarea>
+                    <textarea required class="form-control" name="content" id="exampleFormControlTextarea1"></textarea>
                 </div>
                 <input type="submit" value="Зарегистрировать"/>
             </form>

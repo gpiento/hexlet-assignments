@@ -41,11 +41,11 @@ public final class App {
         app.post("/articles", ctx -> {
             try {
                 String title = ctx.formParamAsClass("title", String.class)
-                        .check(t -> t.length() >= 2, "Название статьи меньше 2 символов.")
-                        .check(t -> !existsByTitle(t), "Статья с таким названием уже существует.")
+                        .check(t -> t.length() >= 2, "Название не должно быть короче двух символов")
+                        .check(t -> !existsByTitle(t), "Статья с таким названием уже существует")
                         .get().trim();
                 String content = ctx.formParamAsClass("content", String.class)
-                        .check(c -> c.length() >= 10, "Статья короче 10 символов.")
+                        .check(c -> c.length() >= 10, "Статья должна быть не короче 10 символов")
                         .get().trim();
                 Article article = new Article(title, content);
                 ArticleRepository.save(article);

@@ -10,6 +10,7 @@ content = @`
             <div class="mb-3">
                 <a href="/articles">Все статьи</a>
             </div>
+
             <div>
                 @if(page.getErrors() != null)
                     <ul>
@@ -25,16 +26,14 @@ content = @`
             <form action="/articles" method="post">
                 <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Название статьи</label>
-                    <input required type="text" name="title" class="form-control placeholder-glow is-invalid"
+                    <input type="text" name="title" class="form-control"
                            id="exampleFormControlInput1"
-                           placeholder="Название статьи" value="${page.getTitle()}">
-                    <div class="invalid-feedback">
-                        Введите название статьи.
-                    </div>
+                           placeholder="Название статьи" value="${page.getTitle()}"/>
                 </div>
                 <div class="mb-3">
                     <label for="exampleFormControlTextarea1" class="form-label">Текст статьи</label>
-                    <textarea required class="form-control" name="content" id="exampleFormControlTextarea1"></textarea>
+                    <textarea class="form-control" name="content"
+                              id="exampleFormControlTextarea1">${page.getContent()}</textarea>
                 </div>
                 <input type="submit" value="Зарегистрировать"/>
             </form>
@@ -42,7 +41,3 @@ content = @`
     </div>
 `
 )
-
-
-
-

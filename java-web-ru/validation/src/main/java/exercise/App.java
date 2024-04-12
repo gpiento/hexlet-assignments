@@ -8,6 +8,7 @@ import io.javalin.Javalin;
 import io.javalin.rendering.template.JavalinJte;
 import io.javalin.validation.ValidationException;
 
+import java.util.Collections;
 import java.util.List;
 
 import static exercise.repository.ArticleRepository.existsByTitle;
@@ -54,7 +55,7 @@ public final class App {
                 String title = ctx.formParam("title");
                 String content = ctx.formParam("content");
                 BuildArticlePage page = new BuildArticlePage(title, content, e.getErrors());
-                ctx.render("articles/build.jte", model("page", page)).status(422);
+                ctx.render("articles/build.jte", Collections.singletonMap("page", page)).status(422);
             }
         });
         // END

@@ -38,12 +38,10 @@ public final class App {
         }
         BaseRepository.dataSource = dataSource;
 
-        String serverHost = System.getenv("SERVER_HOST");
-        int serverPort = Integer.parseInt(System.getenv("SERVER_PORT"));
         Javalin app = Javalin.create(config -> {
             config.bundledPlugins.enableDevLogging();
             config.fileRenderer(new JavalinJte());
-        }).start(serverHost, serverPort);
+        });
 
         app.get(NamedRoutes.rootPath(), RootController::index);
         app.get(NamedRoutes.buildProductPath(), ProductsController::build);
@@ -56,6 +54,8 @@ public final class App {
 
     public static void main(String[] args) throws IOException, SQLException {
         Javalin app = getApp();
-        app.start(7070);
+        String serverHost = System.getenv("SERVER_HOST");
+        int serverPort = Integer.parseInt(System.getenv("SERVER_PORT"));
+        app.start(serverHost, serverPort);
     }
 }

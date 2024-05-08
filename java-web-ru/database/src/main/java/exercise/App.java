@@ -1,23 +1,21 @@
 package exercise;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.IOException;
-import java.sql.SQLException;
-
-import java.util.stream.Collectors;
-
-import exercise.controller.ProductsController;
-import exercise.controller.RootController;
-import exercise.util.NamedRoutes;
-import exercise.repository.BaseRepository;
-
-import io.javalin.Javalin;
-import lombok.extern.slf4j.Slf4j;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+import exercise.controller.ProductsController;
+import exercise.controller.RootController;
+import exercise.repository.BaseRepository;
+import exercise.util.NamedRoutes;
+import io.javalin.Javalin;
 import io.javalin.rendering.template.JavalinJte;
+import lombok.extern.slf4j.Slf4j;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.sql.SQLException;
+import java.util.stream.Collectors;
 
 
 @Slf4j
@@ -31,19 +29,21 @@ public final class App {
         HikariDataSource dataSource = new HikariDataSource(hikariConfig);
         InputStream url = App.class.getClassLoader().getResourceAsStream("schema.sql");
         String sql = new BufferedReader(new InputStreamReader(url))
-            .lines().collect(Collectors.joining("\n"));
+                .lines().collect(Collectors.joining("\n"));
 
         log.info(sql);
         try (var connection = dataSource.getConnection();
-                var statement = connection.createStatement()) {
+             var statement = connection.createStatement()) {
             statement.execute(sql);
         }
         BaseRepository.dataSource = dataSource;
 
+        String serverHost = System.getenv("SERVER_HOST");
+        int serverPort = Integer.parseInt(System.getenv("SERVER_PORT"));
         Javalin app = Javalin.create(config -> {
             config.bundledPlugins.enableDevLogging();
             config.fileRenderer(new JavalinJte());
-        });
+        }).start(serverHost, serverPort);
 
         app.get(NamedRoutes.rootPath(), RootController::index);
         app.get(NamedRoutes.buildProductPath(), ProductsController::build);

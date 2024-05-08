@@ -3,10 +3,10 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent
 import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
 
 plugins {
+    id("com.github.johnrengelman.shadow") version "8.1.1"
     id("com.github.ben-manes.versions") version "0.51.0"
     application
     id("io.freefair.lombok") version "8.6"
-    id("com.github.johnrengelman.shadow") version "8.1.1"
 }
 
 application {

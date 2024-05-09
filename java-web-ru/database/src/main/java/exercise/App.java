@@ -55,7 +55,19 @@ public final class App {
     public static void main(String[] args) throws IOException, SQLException {
         Javalin app = getApp();
         String serverHost = System.getenv("SERVER_HOST");
-        int serverPort = Integer.parseInt(System.getenv("SERVER_PORT"));
+        if (serverHost == null || serverHost.isEmpty()) {
+            serverHost = "localhost";
+        }
+        int serverPort;
+        String serverPortStr = System.getenv("SERVER_PORT");
+        if (serverPortStr == null || serverPortStr.isEmpty()) {
+            serverPort = 7070;
+        } else {
+            serverPort = Integer.parseInt(serverPortStr);
+            if (serverPort <= 1000 || serverPort > 65535) {
+                serverPort = 7070;
+            }
+        }
         app.start(serverHost, serverPort);
     }
 }

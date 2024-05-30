@@ -1,8 +1,12 @@
 package exercise;
 
-import exercise.model.Address;
 import exercise.annotation.Inspect;
+import exercise.model.Address;
+
 import java.lang.reflect.Method;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+import java.lang.reflect.TypeVariable;
 
 public class Application {
     public static void main(String[] args) {
@@ -12,7 +16,7 @@ public class Application {
         Method[] methods = address.getClass().getDeclaredMethods();
         for (Method method : methods) {
             if (method.isAnnotationPresent(Inspect.class)) {
-                System.out.println("Method " + method.getName() + " returns a value of type " + method.getReturnType());
+                System.out.println("Method " + method.getName() + " returns a value of type " + method.getReturnType().getSimpleName());
             }
         }
         // END

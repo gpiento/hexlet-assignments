@@ -1,0 +1,9 @@
+---
+
+# BEGIN
+logging.level.root=WARN
+spring.jpa.generate-ddl=true
+spring.jpa.show-sql=true
+spring.output.ansi.enabled=always
+spring.jpa.hibernate.ddl-auto=update
+# END

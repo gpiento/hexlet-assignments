@@ -44,8 +44,8 @@ public class ProductsController {
     }
 
     @PutMapping(path = "/{id}")
-    public Product update(@PathVariable long id, @RequestBody Product product) {
-        if (productRepository.existsById(id)) {
+    public Product update(@PathVariable String id, @RequestBody Product product) {
+        if (productRepository.existsById(Long.parseLong(id))) {
             product.setId(id);
         } else {
             throw new ResourceNotFoundException("Product with id " + id + " not found");
